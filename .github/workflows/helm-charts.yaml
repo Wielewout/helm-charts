@@ -8,14 +8,26 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  is_main_branch: ${{ github.ref_type == 'branch' && github.ref_name == 'main' }}
-  is_release_branch: ${{ github.ref_type == 'branch' && startsWith(github.ref_name, 'releases/') }}
-  target_branch: ${{ github.ref_type == 'pull_request' && github.event.pull_request.base.ref || github.ref_name }}
-
 jobs:
+
+  vars:
+    name: Variables
+    # This is a work-around to be able to properly use variables.
+    # This job should be made a dependency in order to be able to use its outputs.
+    runs-on: ubuntu-latest
+    outputs:
+      is_main_branch: ${{ github.ref_type == 'branch' && github.ref_name == 'main' }}
+      is_release_branch: ${{ github.ref_type == 'branch' && startsWith(github.ref_name, 'releases/') }}
+      target_branch: ${{ github.ref_type == 'pull_request' && github.event.pull_request.base.ref || github.ref_name }}
+    timeout-minutes: 1
+    steps:
+      - name: Expose variables
+        run: echo "Exposing variables for proper usage"
+
   lint-charts:
     name: Lint Charts
+    needs:
+      - vars
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,17 +55,19 @@ jobs:
       - name: List changed
         id: list-changed
         run: |
-          changed=$(ct list-changed --config etc/ct.yaml --target-branch ${{ env.target_branch }})
+          changed=$(ct list-changed --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }})
           if [[ -n "$changed" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Lint charts
         if: ${{ steps.list-changed.outputs.changed == 'true' }}
-        run: ct lint --config etc/ct.yaml --target-branch ${{ env.target_branch }}
+        run: ct lint --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }}
 
   test-charts:
     name: Test Charts
+    needs:
+      - vars
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -81,7 +95,7 @@ jobs:
       - name: List changed
         id: list-changed
         run: |
-          changed=$(ct list-changed --config etc/ct.yaml --target-branch ${{ env.target_branch }})
+          changed=$(ct list-changed --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }})
           if [[ -n "$changed" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
@@ -92,12 +106,13 @@ jobs:
 
       - name: Test charts
         if: ${{ steps.list-changed.outputs.changed == 'true' }}
-        run: ct install --config etc/ct.yaml --target-branch ${{ env.target_branch }}
+        run: ct install --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }}
 
   release-charts:
     name: Release Charts
-    if: ${{ env.is_main_branch == 'true' || env.is_release_branch == 'true' }}
+    if: ${{ needs.vars.outputs.is_main_branch == 'true' || needs.vars.outputs.is_release_branch == 'true' }}
     needs:
+      - vars
       - lint-charts
       - test-charts
     runs-on: ubuntu-latest
@@ -124,6 +139,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.5.0
         with:
           config: etc/cr.yaml
-          mark_as_latest: ${{ env.is_main_branch == 'true' }}
+          mark_as_latest: ${{ needs.vars.outputs.is_main_branch == 'true' }}
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
