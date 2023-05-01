@@ -42,7 +42,7 @@ if [ ! -f "${GIT_ROOT}/charts/${chart}/Chart.yaml" ]; then
     error "${chart} is not a valid chart"
 fi
 
-if [[ ! "${version}" =~ ^[[:digit:]]*\.[[:digit:]]*$ ]]; then
+if [[ ! "${version}" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]]; then
     error "${version} is not a valid version: use format MAJOR.MINOR (i.e. no PATCH)"
 fi
 
