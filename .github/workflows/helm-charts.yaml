@@ -18,11 +18,18 @@ jobs:
     outputs:
       is_main_branch: ${{ github.ref_type == 'branch' && github.ref_name == 'main' }}
       is_release_branch: ${{ github.ref_type == 'branch' && startsWith(github.ref_name, 'releases/') }}
-      target_branch: ${{ github.ref_type == 'pull_request' && github.event.pull_request.base.ref || github.ref_name }}
+      charts: ${{ steps.list-charts.outputs.charts }}
     timeout-minutes: 1
     steps:
       - name: Expose variables
         run: echo "Exposing variables for proper usage"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: List charts
+        id: list-charts
+        run: echo "charts=$(ls -dm charts/*/ | tr -d ' ')" >> $GITHUB_OUTPUT
 
   lint-charts:
     name: Lint Charts
@@ -32,8 +39,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
@@ -52,17 +57,8 @@ jobs:
       - name: Add helm repositories
         run: ./bin/add-repos
 
-      - name: List changed
-        id: list-changed
-        run: |
-          changed=$(ct list-changed --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }})
-          if [[ -n "$changed" ]]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Lint charts
-        if: ${{ steps.list-changed.outputs.changed == 'true' }}
-        run: ct lint --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }}
+        run: ct lint --config etc/ct.yaml --charts "${{ needs.vars.outputs.charts }}"
 
   test-charts:
     name: Test Charts
@@ -72,8 +68,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
@@ -92,21 +86,11 @@ jobs:
       - name: Add helm repositories
         run: ./bin/add-repos
 
-      - name: List changed
-        id: list-changed
-        run: |
-          changed=$(ct list-changed --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }})
-          if [[ -n "$changed" ]]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Create kind cluster
-        if: ${{ steps.list-changed.outputs.changed == 'true' }}
         uses: helm/kind-action@v1.4.0
 
       - name: Test charts
-        if: ${{ steps.list-changed.outputs.changed == 'true' }}
-        run: ct install --config etc/ct.yaml --target-branch ${{ needs.vars.outputs.target_branch }}
+        run: ct install --config etc/ct.yaml --charts "${{ needs.vars.outputs.charts }}"
 
   release-charts:
     name: Release Charts
