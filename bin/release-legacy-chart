@@ -1,0 +1,119 @@
+#!/bin/bash
+
+function usage() {
+    echo "Usage:"
+    echo "release-legacy-chart"
+    echo "    -h                Display usage."
+    echo "    -f <file>         Release a single file."
+    echo "    -d <dir>          Release all files within the provided directory."
+    echo ""
+    echo "All provided files need to follow the format:"
+    echo "  <chart-name>-<semantic-version>.tgz"
+    echo "This means that a provided directory should only contain packages!"
+    echo ""
+    echo "Make sure to set GITHUB_TOKEN!"
+    echo ""
+    echo ""
+    exit 0
+}
+
+function error() {
+    echo "${1}" 1>&2
+    exit 1
+}
+
+function validate() {
+    file=${1}
+    file_name=$(basename "${file}")
+    
+    if [[ ! "${file_name}" =~ ^[[:alpha:][:digit:]\.\_\-]+-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+(-[[:alpha:][:digit:]\.\-]+)?\.tgz$ ]]; then
+        error "${file_name} is not valid: use format <chart-name>-<semantic-version>.tgz"
+    fi
+
+}
+
+function create_release() {
+    # Source: https://gist.github.com/schell/2fe896953b6728cc3c5d8d5f9f3a17a3
+    file=${1}
+    file_name=$(basename "${file}")
+    tag=${file_name%.*}
+
+    mkdir -p "/tmp/github/${tag}"
+
+    command="curl -s -o \"/tmp/github/${tag}/release.json\" -w '%{http_code}' \
+        --request POST \
+        --header 'authorization: Bearer ${GITHUB_TOKEN}' \
+        --header 'content-type: application/json' \
+        --data '{\"tag_name\": \"${tag}\"}' \
+        https://api.github.com/repos/wielewout/helm-charts/releases"
+    http_code=$(eval "${command}")
+    if [ "${http_code}" != "201" ]; then
+        error "Release ${tag} failed with code '${http_code}'"
+    fi
+
+    echo "Created release ${tag}"
+
+    url=$(jq -r .upload_url "/tmp/github/${tag}/release.json" | cut -d '{' -f '1')
+    command="curl -s -o \"/tmp/github/${tag}/upload.json\" -w '%{http_code}' \
+        --request POST \
+        --header 'authorization: Bearer ${GITHUB_TOKEN}' \
+        --header 'Content-Type: application/octet-stream' \
+        --data-binary @\"${file}\" \
+        ${url}?name=${file_name}"
+    http_code=$(eval "${command}")
+    if [ "${http_code}" != "201" ]; then
+        error "Upload ${file_name} failed with code '${http_code}'"
+    fi
+
+    echo "Asset ${file_name} uploaded"
+}
+
+function handle_file() {
+    file="${1}"
+
+    echo "Got ${file}"
+    validate "${file}"
+    create_release "${file}"
+}
+
+if [ ${#} -eq 0 ]; then
+    echo "release-legacy-chart needs at least a file or directory"
+    echo ""
+    echo ""
+    usage
+fi
+
+file=""
+directory=""
+
+while getopts ":hf:d:" opt; do
+    case ${opt} in
+        h )
+            usage
+        ;;
+        f )
+            file="${OPTARG}"
+        ;;
+        d )
+            directory="${OPTARG}"
+        ;;
+        \? )
+            error "Invalid Option: -${OPTARG}"
+        ;;
+        : )
+            error "Invalid option: ${OPTARG} requires an argument"
+        ;;
+    esac
+done
+shift $((OPTIND -1))
+
+if [[ "${file}" != "" ]]; then
+    handle_file "${file}"
+fi
+
+if [[ "${directory}" != "" ]]; then
+    echo "Looking into ${directory}"
+    for file in "${directory}"/*; do
+        handle_file "${file}"
+    done
+fi
