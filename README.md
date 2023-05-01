@@ -17,7 +17,7 @@ To locally add all necessary repos:
 ## Legacy helm charts
 
 To add legacy helm charts, they need to be added to a release with the packaged chart as an asset.
-Then the chart releaser picks it up on its next run where a chart changes. 
+Then the chart releaser does **NOT** pick it up on its next run, so the index file should be updated manually.
 
 The script expect either a directory of packaged charts or a single file.
 The release tag and so on are derived from the file name.
