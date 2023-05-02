@@ -17,19 +17,16 @@ To locally add all necessary repos:
 ## Legacy helm charts
 
 To add legacy helm charts, they need to be added to a release with the packaged chart as an asset.
-Then the chart releaser does **NOT** pick it up on its next run, so the index file should be updated manually.
+This asset then needs to be linked to the `index.yaml` file for GitHub Pages.
 
-The script expect either a directory of packaged charts or a single file.
-The release tag and so on are derived from the file name.
+The `release-legacy-chart` script expect either a directory of packaged charts or a single file (i.c.w. an index file).
+The release tag etc. are derived from the file name.
 
 ```sh
  export GITHUB_TOKEN=abc-xyz
 
-./bin/release-legacy-chart -f example-0.1.0.tgz
+./bin/release-legacy-chart -f example-0.1.0.tgz -i index.yaml
 ./bin/release-legacy-chart -d charts
 ```
 
 > Note the space to hide the token from history.
-
-> The directory should only contain packaged helm charts and nothing else.
-> Otherwise it will fail.
