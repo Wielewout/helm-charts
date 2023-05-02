@@ -3,6 +3,13 @@
   "extends": [
     "config:base"
   ],
+  "helmv3": {
+    "fileMatch": [
+      "(^|/)Chart\\.yaml$"
+    ],
+    "commitMessageTopic": "update {{depName}}",
+    "registryAliases": {}
+  },
   "regexManagers": [
     {
       "datasourceTemplate": "docker",
