@@ -1,0 +1,9 @@
+dependencies:
+- name: hello
+  repository: https://wielewout.github.io/helm-charts/
+  version: 0.1.0
+- name: example
+  repository: https://wielewout.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:a2279c7dac83434d09f01e772affe043a4adc0d5d98ee2ac7cc3e4a0d8163a8b
+generated: "2023-05-02T14:36:55.426376831+02:00"

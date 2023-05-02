@@ -1,0 +1,15 @@
+apiVersion: v2
+name: combi
+description: A Helm super chart for Kubernetes
+type: application
+
+version: 0.1.0
+appVersion: "2023.05"
+
+dependencies:
+- name: hello
+  version: "0.1"
+  repository: https://wielewout.github.io/helm-charts/
+- name: example
+  version: "0.1.0"
+  repository: https://wielewout.github.io/helm-charts/
