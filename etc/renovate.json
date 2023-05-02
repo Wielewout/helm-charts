@@ -1,4 +1,8 @@
 {
+  "onboarding": false,
+  "requireConfig": "ignored",
+  "branchPrefix": "renovate/",
+  "platform": "github",
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
