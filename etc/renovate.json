@@ -8,6 +8,9 @@
   "repositories": [
     "Wielewout/helm-charts"
   ],
+  "dependencyDashboard": true,
+  "dependencyDashboardApproval": false,
+  "dependencyDashboardAutoclose": true,
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
