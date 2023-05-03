@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0](https://github.com/Wielewout/helm-charts/compare/hello-0.4.2...hello-0.5.0) (2023-05-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* organize page config
+
+### Bug Fixes
+
+* Organize page config ([10838f3](https://github.com/Wielewout/helm-charts/commit/10838f31dd33048b28f0748cf55fc8cf009bfbb3))
+
 ## [0.4.2](https://github.com/Wielewout/helm-charts/compare/hello-0.4.1...hello-0.4.2) (2023-05-03)
 
 
