@@ -14,10 +14,6 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Print pull_request object
-        run: |
-          echo "${{ github.event.pull_request }}"
-          echo "${{ github.event.pull_request.merged }}"
       - name: Remove pending release label
         uses: buildsville/add-remove-label@v2.0.0
         with:
