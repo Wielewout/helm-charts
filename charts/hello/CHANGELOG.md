@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/Wielewout/helm-charts/compare/hello-0.4.0...hello-v0.4.1) (2023-05-03)
+
+
+### Features
+
+* Add body ([55f96a7](https://github.com/Wielewout/helm-charts/commit/55f96a75bc3c62171ad2baec098379570874bb53))
+
 ## [0.4.0](https://github.com/Wielewout/helm-charts/compare/hello-0.3.1...hello-v0.4.0) (2023-05-03)
 
 
