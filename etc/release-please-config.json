@@ -7,7 +7,7 @@
   "include-component-in-tag": true,
   "include-v-in-tags": false,
   "separate-pull-requests": true,
-  "pull-request-title-pattern": "chore: release ${component} ${version}",
+  "pull-request-title-pattern": "chore: release${component} ${version}",
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
   "plugins": [
