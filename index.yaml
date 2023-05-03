@@ -3,6 +3,23 @@ entries:
   combi:
   - apiVersion: v2
     appVersion: "2023.05"
+    created: "2023-05-03T16:04:35.950675901Z"
+    dependencies:
+    - name: hello
+      repository: https://wielewout.github.io/helm-charts/
+      version: 0.4.1
+    - name: example
+      repository: https://wielewout.github.io/helm-charts/
+      version: 0.2.0
+    description: A Helm super chart for Kubernetes
+    digest: 717cea11d083e4d56d720c4678c4adad8dc81926e9e9d44abb09b2b672860728
+    name: combi
+    type: application
+    urls:
+    - https://github.com/Wielewout/helm-charts/releases/download/combi-0.1.1/combi-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: "2023.05"
     created: "2023-05-02T12:43:35.945246166Z"
     dependencies:
     - name: hello
@@ -121,4 +138,4 @@ entries:
     urls:
     - https://github.com/Wielewout/helm-charts/releases/download/legacy-0.1.0/legacy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-03T15:23:00.050424882Z"
+generated: "2023-05-03T16:04:35.950697001Z"
