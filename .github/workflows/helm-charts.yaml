@@ -171,4 +171,7 @@ jobs:
     # as it doesn't yet have the release to compare changes with.
     needs:
       - release-charts
+    permissions:
+      contents: write
+      pull-requests: write
     uses: ./.github/workflows/release-please.yaml
