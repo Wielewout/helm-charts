@@ -76,6 +76,12 @@ shift $((OPTIND -1))
 
 git checkout -b "releases/${chart}-${version}" "${commit}" || error "Branch releases/${chart}-${version} already exists"
 
+contents="$(jq '.versioning = "always-bump-patch"' "${GIT_ROOT}"/etc/release-please-config.json)" && \
+echo -E "${contents}" > "${GIT_ROOT}"/etc/release-please-config.json
+
+git add "${GIT_ROOT}"/etc/release-please-config.json
+git commit -m "chore: prepare ${chart} ${version} release branch"
+
 if [[ "${push}" == true ]]; then
     git push --set-upstream origin "releases/${chart}-${version}"
 fi

@@ -14,12 +14,29 @@ To locally add all necessary repos:
 ./bin/add-repos
 ```
 
-## Legacy helm charts
+## New charts
+
+A bit of setup is needed for release please when adding a new chart.
+This is automated in `bin/add-chart`.
+
+```sh
+./bin/add-chart example 0.1.0
+```
+
+> The initial version is optional (default is `0.1.0`).
+
+> **Note**
+>
+> When adding a new chart, the chart releaser action will always create an initial release without release please intervening.
+> This means that the automatic changelog etc. will be missing in this initial GitHub release.
+> Instead, chart releaser will use the description in `Chart.yaml` as the body of the GitHub release.
+
+## Legacy charts
 
 To add legacy helm charts, they need to be added to a release with the packaged chart as an asset.
 This asset then needs to be linked to the `index.yaml` file for GitHub Pages.
 
-The `release-legacy-chart` script expect either a directory of packaged charts or a single file (i.c.w. an index file).
+The `release-legacy-chart` script expects either a directory of packaged charts or a single file (i.c.w. an index file).
 The release tag etc. are derived from the file name.
 
 ```sh
