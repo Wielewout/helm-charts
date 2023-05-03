@@ -25,9 +25,9 @@ jobs:
           labels: "release: pending"
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Add  ${{ github.event.pull_request.merged == 'true' && 'approved' || 'rejected' }} release label
+      - name: Add  ${{ github.event.pull_request.merged && 'approved' || 'rejected' }} release label
         uses: buildsville/add-remove-label@v2.0.0
         with:
           type: add
-          labels: "release: ${{ github.event.pull_request.merged == 'true' && 'approved' || 'rejected' }}"
+          labels: "release: ${{ github.event.pull_request.merged && 'approved' || 'rejected' }}"
           token: ${{ secrets.GITHUB_TOKEN }}
