@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/Wielewout/helm-charts/compare/combi-0.1.1...combi-0.1.2) (2023-05-03)
+
+
+### Bug Fixes
+
+* Touch combi to trigger release please ([dcb7b90](https://github.com/Wielewout/helm-charts/commit/dcb7b90bf73cb80df4cbae49584f93624d2d578e))
+
 ## [0.1.1](https://github.com/Wielewout/helm-charts/compare/combi-0.1.0...combi-0.1.1) (2023-05-03)
 
 
