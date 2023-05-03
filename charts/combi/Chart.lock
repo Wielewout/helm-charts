@@ -4,6 +4,6 @@ dependencies:
   version: 0.4.1
 - name: example
   repository: https://wielewout.github.io/helm-charts/
-  version: 0.2.0
-digest: sha256:b65f87a1c261ef42d81b6d7527db19d4839c27580b0d15978e28dd65f7b9c115
-generated: "2023-05-03T17:46:52.086734124+02:00"
+  version: 0.2.1
+digest: sha256:5b4544dc41fafa89c259f4ad2482d76f5b2bf67670ce879ff68ef81bc9b1a8ae
+generated: "2023-05-03T17:23:30.960329914Z"
