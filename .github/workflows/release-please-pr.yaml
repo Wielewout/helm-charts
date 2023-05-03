@@ -9,6 +9,7 @@ jobs:
 
   label-release-pr:
     name: Label Release PR
+    if: "${{ startsWith(github.event.pull_request.title, 'chore: release') }}"
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
