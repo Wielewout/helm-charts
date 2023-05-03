@@ -6,6 +6,7 @@ hello:
   greeting: hello
   who: world
 
+body: null
 
 replicaCount: 1
 

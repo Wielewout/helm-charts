@@ -16,5 +16,8 @@ data:
     </head>
     <body>
     <h1>{{ title .Values.hello.greeting }} {{ .Values.hello.who }}!</h1>
+    {{- with .Values.body }}
+    <p>{{ . }}</p>
+    {{- end }}
     </body>
     </html>
