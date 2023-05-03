@@ -28,7 +28,7 @@
       "datasourceTemplate": "docker",
       "fileMatch": ["(^|/)Chart\\.yaml$"],
       "matchStrings": [
-        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
+        "appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\"\\s?#\\s?renovate: image=(?<depName>.*?)"
       ]
     }
   ]
