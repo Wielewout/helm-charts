@@ -2,12 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-hello:
-  greeting: hello
-  who: world
-
-body: null
-footer: null
+page:
+  title:
+    greeting: hello
+    who: world
+  body: null
+  footer: null
 
 replicaCount: 1
 
