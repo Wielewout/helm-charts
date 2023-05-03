@@ -3,8 +3,8 @@
   "requireConfig": "ignored",
   "branchPrefix": "renovate/",
   "platform": "github",
-  "username": "renovate-bot",
-  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+  "username": "vandewiel-renovate-bot",
+  "gitAuthor": "Renovate Bot <vandewiel.renovate@gmail.com>",
   "repositories": [
     "Wielewout/helm-charts"
   ],
