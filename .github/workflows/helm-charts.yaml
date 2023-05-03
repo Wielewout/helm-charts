@@ -81,8 +81,8 @@ jobs:
           ct lint
             --config etc/ct.yaml
             ${{ needs.vars.outputs.is_pull_request == 'true'
-              && format("--target-branch {0}", needs.vars.outputs.target_branch)
-              || format("--charts {0}", needs.vars.outputs.charts)
+              && format('--target-branch {0}', needs.vars.outputs.target_branch)
+              || format('--charts {0}', needs.vars.outputs.charts)
             }}
 
   test-charts:
@@ -135,8 +135,8 @@ jobs:
           ct install
             --config etc/ct.yaml
             ${{ needs.vars.outputs.is_pull_request == 'true'
-              && format("--target-branch {0}", needs.vars.outputs.target_branch)
-              || format("--charts {0}", needs.vars.outputs.charts)
+              && format('--target-branch {0}', needs.vars.outputs.target_branch)
+              || format('--charts {0}', needs.vars.outputs.charts)
             }}
 
   release-charts:
