@@ -1,4 +1,4 @@
-name: Release Please PR
+name: Release Please PR Labels
 
 on:
   pull_request:
