@@ -165,7 +165,7 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
   release-please:
-    name: Release Please
+    name: Release
     # Run after release-charts so that the tag exists in case of release commits.
     # Otherwise release please will create a new PR
     # as it doesn't yet have the release to compare changes with.
