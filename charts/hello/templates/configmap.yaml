@@ -7,7 +7,7 @@ data:
     <!DOCTYPE html>
     <html>
     <head>
-    <title>Hello world!</title>
+    <title>{{ title .Values.hello.greeting }} {{ .Values.hello.who }}!</title>
     <style>
     html { color-scheme: light dark; }
     body { width: 35em; margin: 0 auto;
@@ -15,6 +15,6 @@ data:
     </style>
     </head>
     <body>
-    <h1>Hello {{ .Values.hello }}!</h1>
+    <h1>{{ title .Values.hello.greeting }} {{ .Values.hello.who }}!</h1>
     </body>
     </html>
