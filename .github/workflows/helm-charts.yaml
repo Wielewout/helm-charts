@@ -166,6 +166,7 @@ jobs:
 
   release-please:
     name: Release
+    if: ${{ needs.vars.outputs.is_main_branch == 'true' || needs.vars.outputs.is_release_branch == 'true' }}
     # Run after release-charts so that the tag exists in case of release commits.
     # Otherwise release please will create a new PR
     # as it doesn't yet have the release to compare changes with.
