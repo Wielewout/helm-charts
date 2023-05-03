@@ -19,5 +19,8 @@ data:
     {{- with .Values.body }}
     <p>{{ . }}</p>
     {{- end }}
+    {{- with .Values.footer }}
+    <footer>{{ . }}</footer>
+    {{- end }}
     </body>
     </html>

@@ -7,6 +7,7 @@ hello:
   who: world
 
 body: null
+footer: null
 
 replicaCount: 1
 
