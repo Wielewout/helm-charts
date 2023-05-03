@@ -18,8 +18,8 @@ jobs:
     outputs:
       is_main_branch: ${{ github.ref_type == 'branch' && github.ref_name == 'main' }}
       is_release_branch: ${{ github.ref_type == 'branch' && startsWith(github.ref_name, 'releases/') }}
-      is_pull_request: ${{ github.ref_type == 'pull_request' }}
-      target_branch: ${{ github.ref_type == 'pull_request' && github.event.pull_request.base.ref || github.ref_name }}
+      is_pull_request: ${{ github.event_name == 'pull_request' }}
+      target_branch: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || github.ref_name }}
       charts: ${{ steps.list-charts.outputs.charts }}
     timeout-minutes: 1
     steps:
