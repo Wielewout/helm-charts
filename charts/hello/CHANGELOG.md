@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/Wielewout/helm-charts/compare/hello-0.4.1...hello-0.4.2) (2023-05-03)
+
+
+### Features
+
+* Add footer ([f80d14b](https://github.com/Wielewout/helm-charts/commit/f80d14b903dfcee6e0d4f26d083e9987b9d1acb5))
+
 ## [0.4.1](https://github.com/Wielewout/helm-charts/compare/hello-0.4.0...hello-v0.4.1) (2023-05-03)
 
 
