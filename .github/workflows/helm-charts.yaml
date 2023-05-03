@@ -163,3 +163,12 @@ jobs:
           mark_as_latest: ${{ needs.vars.outputs.is_main_branch == 'true' }}
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  release-please:
+    name: Release Please
+    # Run after release-charts so that the tag exists in case of release commits.
+    # Otherwise release please will create a new PR
+    # as it doesn't yet have the release to compare changes with.
+    needs:
+      - release-charts
+    uses: ./.github/workflows/release-please.yaml
