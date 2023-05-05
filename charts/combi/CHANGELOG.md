@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.3](https://github.com/Wielewout/helm-charts/compare/combi-0.1.2...combi-0.1.3) (2023-05-05)
+
+
+### Features
+
+* Add direct dep to combi ([079c871](https://github.com/Wielewout/helm-charts/commit/079c871572788ee9997d7fd8ee4f570b7c612a18))
+
+
+### Bug Fixes
+
+* Fix chart lock file ([ed86df7](https://github.com/Wielewout/helm-charts/commit/ed86df7fbc2a6aa6d6eeef0c4cf9e7cd31b3ca79))
+* Remove direct-dep repo in combi chart ([15d561a](https://github.com/Wielewout/helm-charts/commit/15d561a34e6e2a0c276b806b50b9206c23722e07))
+
 ## [0.1.2](https://github.com/Wielewout/helm-charts/compare/combi-0.1.1...combi-0.1.2) (2023-05-03)
 
 
