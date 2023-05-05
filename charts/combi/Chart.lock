@@ -5,5 +5,8 @@ dependencies:
 - name: example
   repository: https://wielewout.github.io/helm-charts/
   version: 0.2.1
-digest: sha256:50cb9a039161c4c021ef856709df93a99ef3bda44437a45d5f5e44d7dc097ad4
-generated: "2023-05-03T17:42:30.943517593Z"
+- name: direct-dependency
+  repository: ""
+  version: 0.1.0
+digest: sha256:7cee734e7232117f64222c890e51c9ea40ac36902d74561fc227f87db27433f9
+generated: "2023-05-05T13:11:15.516851566+02:00"
