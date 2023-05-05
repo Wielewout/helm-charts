@@ -13,4 +13,3 @@ dependencies:
     repository: https://wielewout.github.io/helm-charts/
   - name: direct-dependency
     version: 0.1.0
-    repository: file://charts/direct-dependency/
