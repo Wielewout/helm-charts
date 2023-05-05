@@ -11,3 +11,6 @@ dependencies:
   - name: example
     version: 0.2.1
     repository: https://wielewout.github.io/helm-charts/
+  - name: direct-dependency
+    version: 0.1.0
+    repository: file://charts/direct-dependency/
