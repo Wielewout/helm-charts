@@ -6,7 +6,7 @@ version: 0.1.3
 appVersion: '2023.05'
 dependencies:
   - name: hello
-    version: 0.5.0
+    version: 0.5.1
     repository: https://wielewout.github.io/helm-charts/
   - name: example
     version: 0.2.1
