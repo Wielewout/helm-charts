@@ -14,14 +14,6 @@
     "sentence-case"
   ],
   "packages": {
-    "charts/combi": {
-      "component": "combi",
-      "package-name": "combi"
-    },
-    "charts/example": {
-      "component": "example",
-      "package-name": "example"
-    },
     "charts/hello": {
       "component": "hello",
       "package-name": "hello"
