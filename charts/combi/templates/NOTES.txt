@@ -1,1 +1,0 @@
-Combi helm chart installed with both example and hello
