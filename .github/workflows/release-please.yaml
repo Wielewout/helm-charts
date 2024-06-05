@@ -2,6 +2,7 @@ name: Release Please
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
 
@@ -13,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Release please
+        if: ${{ github.ref_name == 'main' || startsWith(github.ref_name, 'releases/') }}
         uses: google-github-actions/release-please-action@v4
         with:
-          command: manifest-pr
-          default-branch: ${{ github.ref_name }}
+          target-branch: ${{ github.ref_name }}
           config-file: "etc/release-please-config.json"
           manifest-file: "etc/.release-please-manifest.json"

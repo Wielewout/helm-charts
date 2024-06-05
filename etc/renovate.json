@@ -5,20 +5,21 @@
   "platform": "github",
   "username": "vandewiel-renovate-bot",
   "gitAuthor": "Renovate Bot <vandewiel.renovate@gmail.com>",
-  "semanticCommits": "enabled",
-  "semanticCommitType": "fix",
-  "semanticCommitScope": "deps",
-  "commitMessagePrefix": "fix(deps):",
   "repositories": [
     "Wielewout/helm-charts"
   ],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
   "dependencyDashboardAutoclose": false,
+  "reviewers": [
+    "Wielewout"
+  ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    ":semanticCommits"
+    ":semanticCommits",
+    ":semanticCommitTypeAll(fix)",
+    ":automergeMinor"
   ],
   "helmv3": {
     "fileMatch": [
@@ -32,8 +33,17 @@
       "datasourceTemplate": "docker",
       "fileMatch": ["(^|/)Chart\\.yaml$"],
       "matchStrings": [
-        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"??(?<currentValue>[\\w+\\.\\-]*)\"?"
-      ]
+        "#\\s?renovate: image=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extract_version=(?<extractVersion>.*?))?\\s?appVersion:\\s?\"?(?<currentValue>[\\w+\\.\\-]*)\"?"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}docker{{/if}}"
+    },
+    {
+      "datasourceTemplate": "github-releases",
+      "fileMatch": ["(^|/)helm-charts\\.y[a]?ml$"],
+      "matchStrings": [
+        "#\\s?renovate: github_repository=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extract_version=(?<extractVersion>.*?))?\\s*[\\w\\-]*_version:\\s?\"?(?<currentValue>[\\w+\\.\\-]*)\"?"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
