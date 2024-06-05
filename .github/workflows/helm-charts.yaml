@@ -15,6 +15,13 @@ jobs:
     # This is a work-around to be able to properly use variables.
     # This job should be made a dependency in order to be able to use its outputs.
     runs-on: ubuntu-latest
+    concurrency:
+      # With the concurrency group we make sure that release please runs are cancelled
+      # as new commits were pushed to main.
+      # This prevents earlier runs of release please that didn't start yet,
+      # to prematurely create a new PR because it couldn't find the actual release.
+      group: release-please-${{ github.ref_name }}
+      cancel-in-progress: true
     outputs:
       is_main_branch: ${{ github.ref_type == 'branch' && github.ref_name == 'main' }}
       is_release_branch: ${{ github.ref_type == 'branch' && startsWith(github.ref_name, 'releases/') }}
