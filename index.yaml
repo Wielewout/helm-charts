@@ -115,6 +115,16 @@ entries:
     version: 0.1.0
   hello:
   - apiVersion: v2
+    appVersion: 1.27.0
+    created: "2024-07-18T20:18:49.426714824Z"
+    description: A Helm chart for Kubernetes
+    digest: ae7b471fd16072e4250487b6d4747420b7596d01f73c2525660b90347a703b50
+    name: hello
+    type: application
+    urls:
+    - https://github.com/Wielewout/helm-charts/releases/download/hello-0.5.2/hello-0.5.2.tgz
+    version: 0.5.2
+  - apiVersion: v2
     appVersion: 1.25.0
     created: "2023-10-27T09:26:11.976814582Z"
     description: A Helm chart for Kubernetes
@@ -236,4 +246,4 @@ entries:
     urls:
     - https://github.com/Wielewout/helm-charts/releases/download/world-0.1.0/world-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-18T19:48:10.777784431Z"
+generated: "2024-07-18T20:18:49.426772473Z"
