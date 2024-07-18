@@ -12,15 +12,6 @@ jobs:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
-    concurrency:
-      # With the concurrency group we make sure that release please runs are cancelled
-      # as new commits were pushed to main.
-      # This prevents earlier runs of release please that didn't start yet,
-      # to prematurely create a new PR because it couldn't find the actual release.
-      # This concurrency group is also added to the beginning of the helm-charts workflow
-      # so that we can skip release please runs that are still in the queue.
-      group: release-please-${{ github.ref_name }}
-      cancel-in-progress: true
     steps:
       - name: Release please
         if: ${{ github.ref_name == 'main' || startsWith(github.ref_name, 'releases/') }}
