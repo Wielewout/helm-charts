@@ -22,6 +22,7 @@ jobs:
       target_branch: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || github.ref_name }}
       lib_charts: ${{ steps.list-charts.outputs.lib_charts }}
       charts_to_lint: ${{ steps.list-charts.outputs.charts_to_lint }}
+      charts_to_test: ${{ steps.list-charts.outputs.charts_to_test }}
       charts_to_test_matrix: ${{ steps.list-charts.outputs.charts_to_test_matrix }}
       # renovate: github_repository=metallb/metallb versioning=semver
       metallb_version: v0.14.5
@@ -52,6 +53,7 @@ jobs:
         run: |
           echo "lib_charts=$(./bin/list-charts ${{ github.event_name == 'pull_request' && format('--changed-only --target-branch={0}', github.base_ref) || '' }} --list --delimiter=, --path lib)" | tee -a $GITHUB_OUTPUT
           echo "charts_to_lint=$(./bin/list-charts ${{ github.event_name == 'pull_request' && format('--changed-only --target-branch={0}', github.base_ref) || '' }} --list --delimiter=, --path lint)" | tee -a $GITHUB_OUTPUT
+          echo "charts_to_test=$(./bin/list-charts ${{ github.event_name == 'pull_request' && format('--changed-only --target-branch={0}', github.base_ref) || '' }} --list --delimiter=, --path test)" | tee -a $GITHUB_OUTPUT
           echo "charts_to_test_matrix=$(./bin/list-charts ${{ github.event_name == 'pull_request' && format('--changed-only --target-branch={0}', github.base_ref) || '' }} --matrix test)" | tee -a $GITHUB_OUTPUT
 
   lint-charts:
@@ -99,7 +101,7 @@ jobs:
     name: Test Charts
     needs:
       - vars
-    if: ${{ needs.vars.outputs.charts_to_test_matrix != '' }}
+    if: ${{ needs.vars.outputs.charts_to_test != '' }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.vars.outputs.charts_to_test_matrix) }}
