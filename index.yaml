@@ -72,6 +72,16 @@ entries:
     urls:
     - https://github.com/Wielewout/helm-charts/releases/download/combi-0.1.0/combi-0.1.0.tgz
     version: 0.1.0
+  ex-lib:
+  - apiVersion: v2
+    created: "2024-07-18T19:48:10.425409042Z"
+    description: A Helm chart for Kubernetes
+    digest: 885e10c14cf498f355bc2042dd3c72f38a1a20756be2aec8b6335389bb74de56
+    name: ex-lib
+    type: library
+    urls:
+    - https://github.com/Wielewout/helm-charts/releases/download/ex-lib-0.1.0/ex-lib-0.1.0.tgz
+    version: 0.1.0
   example:
   - apiVersion: v2
     appVersion: 1.24.0
@@ -215,4 +225,15 @@ entries:
     urls:
     - https://github.com/Wielewout/helm-charts/releases/download/legacy-0.1.0/legacy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-27T09:26:11.977145786Z"
+  world:
+  - apiVersion: v2
+    appVersion: 1.27.0
+    created: "2024-07-18T19:48:10.777740318Z"
+    description: A Helm chart for Kubernetes
+    digest: f6be9ffaa042c1d1ee40fb8759e19019ff8f3f86791cc420013d2e220ac4c283
+    name: world
+    type: application
+    urls:
+    - https://github.com/Wielewout/helm-charts/releases/download/world-0.1.0/world-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-18T19:48:10.777784431Z"
