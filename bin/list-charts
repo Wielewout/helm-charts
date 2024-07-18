@@ -18,7 +18,9 @@ def main():
     args = get_args()
 
     charts = get_charts(args.type, args.changed_only, args.target_branch)
-    output = generate_output_charts(charts, args.chart_output, args.delimiter)
+    output = generate_output_charts(
+        charts, args.output, args.chart_output, args.delimiter
+    )
     print(output)
 
 
@@ -32,6 +34,24 @@ def get_args():
         choices=["lint", "test", "all", "app", "lib"],
         default="all",
         help="Show all charts (all), application charts (app), library charts (lib), charts to ct lint (lint) or to ct test (test)",
+    )
+
+    parser.add_argument(
+        "-l",
+        "--list",
+        action="store_const",
+        const="list",
+        dest="output",
+        default="list",
+        help="Show charts in a list",
+    )
+    parser.add_argument(
+        "-m",
+        "--matrix",
+        action="store_const",
+        const="matrix",
+        dest="output",
+        help="Show charts in a GitHub Actions matrix",
     )
 
     parser.add_argument(
@@ -206,17 +226,28 @@ def get_ignored_chart_for_test_path(chart_path: str) -> str:
 
 
 def generate_output_charts(
-    charts: list[Chart], charts_output: str, delimiter: str
+    charts: list[Chart], output: str, charts_output: str, delimiter: str
 ) -> str:
     chart_names: list[str] = [chart.name for chart in charts]
     chart_paths = [chart.path for chart in charts]
 
-    if charts_output == "path":
-        charts = chart_paths
-    else:
-        charts = chart_names
+    if output == "list":
+        if charts_output == "path":
+            charts = chart_paths
+        else:
+            charts = chart_names
 
-    return delimiter.join(charts)
+        return delimiter.join(charts)
+
+    if output == "matrix":
+        return json.dumps(
+            {
+                "chart": chart_names,
+                "include": [
+                    {"chart": chart.name, "chart_path": chart.path} for chart in charts
+                ],
+            }
+        )
 
 
 if __name__ == "__main__":
