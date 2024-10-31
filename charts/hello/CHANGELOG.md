@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.3](https://github.com/Wielewout/helm-charts/compare/hello-0.5.2...hello-0.5.3) (2024-10-31)
+
+
+### Bug Fixes
+
+* **deps:** Update nginx docker tag to v1.27.1 ([#103](https://github.com/Wielewout/helm-charts/issues/103)) ([9c409c2](https://github.com/Wielewout/helm-charts/commit/9c409c2dccbadf381880746935b0215994259a51))
+
 ## [0.5.2](https://github.com/Wielewout/helm-charts/compare/hello-0.5.1...hello-0.5.2) (2024-07-18)
 
 
