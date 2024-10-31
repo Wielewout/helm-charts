@@ -1,25 +1,16 @@
 {
-  "onboarding": false,
-  "requireConfig": "ignored",
-  "branchPrefix": "renovate/",
-  "platform": "github",
-  "username": "vandewiel-renovate-bot",
-  "gitAuthor": "Renovate Bot <vandewiel.renovate@gmail.com>",
-  "repositories": [
-    "Wielewout/helm-charts"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(fix)",
+    ":automergeMinor"
   ],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
   "dependencyDashboardAutoclose": false,
   "reviewers": [
     "Wielewout"
-  ],
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":semanticCommits",
-    ":semanticCommitTypeAll(fix)",
-    ":automergeMinor"
   ],
   "helmv3": {
     "fileMatch": [
