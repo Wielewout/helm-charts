@@ -19,18 +19,24 @@
     "commitMessageTopic": "update {{depName}}",
     "registryAliases": {}
   },
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "datasourceTemplate": "docker",
-      "fileMatch": ["(^|/)Chart\\.yaml$"],
+      "fileMatch": [
+        "(^|/)Chart\\.yaml$"
+      ],
       "matchStrings": [
         "#\\s?renovate: image=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extract_version=(?<extractVersion>.*?))?\\s?appVersion:\\s?\"?(?<currentValue>[\\w+\\.\\-]*)\"?"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}docker{{/if}}"
     },
     {
+      "customType": "regex",
       "datasourceTemplate": "github-releases",
-      "fileMatch": ["(^|/)helm-charts\\.y[a]?ml$"],
+      "fileMatch": [
+        "(^|/)helm-charts\\.y[a]?ml$"
+      ],
       "matchStrings": [
         "#\\s?renovate: github_repository=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extract_version=(?<extractVersion>.*?))?\\s*[\\w\\-]*_version:\\s?\"?(?<currentValue>[\\w+\\.\\-]*)\"?"
       ],
