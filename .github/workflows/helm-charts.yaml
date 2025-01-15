@@ -183,18 +183,19 @@ jobs:
           --charts ${{ matrix.chart_path }}
 
   # This is a work-around for a required check with matrix in the branch protection rules
-  test-charts-status:
-    name: Test Charts Status
+  status-charts:
+    name: Status Charts
     needs:
       - vars
+      - lint-charts
       - test-charts
     if: ${{ needs.vars.outputs.is_pull_request == 'true' && always() }}
     runs-on: ubuntu-24.04
     steps:
-      - name: Successful tests
+      - name: Successful checks
         if: ${{ !(contains(needs.*.result, 'failure')) }}
         run: exit 0
-      - name: Failing tests
+      - name: Failing checks
         if: ${{ contains(needs.*.result, 'failure') }}
         run: exit 1
 
