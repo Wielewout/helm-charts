@@ -34,39 +34,48 @@ runs:
             process.exit(0);
           }
 
-          const checksResponse = await github.rest.checks.listForRef({
-            owner: owner,
-            repo: repo,
-            ref: `heads/${branch}`,
-          });
-          if (checksResponse.status != 200) {
-            core.setFailed(`Merging is blocked as the checks for ${branch} couldn't be retrieved`);
-            process.exit(1);
-          }
+          const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-          const checks = checksResponse.data.check_runs;
-
-          let isCompleted = true;
-          for (const check of checks) {
-            if (check.status !== "completed") {
-              isCompleted = false;
+          const retry = async (fn, maxAttempts) => {
+            for (let attempt = 0; attempt < maxAttempts; attempt++) {
+              try {
+                return await fn();
+              } catch (err) {
+                console.error(`Error in attempt ${attempt}: ${err.message}`);
+                await sleep(15000);
+              }
             }
-          }
+          };
 
-          if (!isCompleted) {
-            core.setFailed(`Merging is blocked as the checks for ${branch} haven't completed yet`);
-            process.exit(1);
-          }
-
-          let isFailure = true;
-          for (const check of checks) {
-            if (check.conclusion !== "failure") {
-              isFailure = false;
+          const fetchCompletedChecks = async () => {
+            const checksResponse = await github.rest.checks.listForRef({
+              owner: owner,
+              repo: repo,
+              ref: `heads/${branch}`,
+            });
+            if (checksResponse.status != 200) {
+              throw new Error(`Checks for ${branch} couldn't be retrieved in attempt ${attempt}`);
             }
-          }
-          
-          if (isFailure) {
-            process.exit(1);
+
+            const checks = checksResponse.data.check_runs;
+
+            for (const check of checks) {
+              if (check.status !== "completed") {
+                throw new Error(`Merging is blocked as the checks for ${branch} haven't completed yet`);
+              }
+            }
+
+            return checks;
+          };
+
+
+          const completedChecks = await retry(fetchCompletedChecks, Infinity);
+
+          for (const check of completedChecks) {
+            if (check.conclusion === "failure") {
+              core.setFailed(`Merging is blocked as the checks for ${branch} include a failure`);
+              process.exit(1);
+            }
           }
 
           console.log(`Merging is allowed as all checks for ${branch} have completed without failures`);
