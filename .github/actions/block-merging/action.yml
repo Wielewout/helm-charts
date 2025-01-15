@@ -45,11 +45,9 @@ runs:
           }
 
           const checks = checksResponse.data.check_runs;
-          console.log(checks);
 
           let isCompleted = true;
           for (const check of checks) {
-            console.log(check);
             if (check.status !== "completed") {
               isCompleted = false;
             }
