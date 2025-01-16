@@ -9,7 +9,7 @@ inputs:
     default: main
   bypass_prefix:
     description: Commit message prefix to bypass the check
-    default: fix
+    default: "fix(mergeability): "
 runs:
   using: "composite"
   steps:
