@@ -42,7 +42,7 @@ runs:
                 return await fn();
               } catch (err) {
                 console.error(`Error in attempt ${attempt}: ${err.message}`);
-                await sleep(15000);
+                await sleep(5000);
               }
             }
           };
