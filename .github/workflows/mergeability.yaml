@@ -2,8 +2,7 @@ name: Mergeability
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
-    branches: [main]
+  merge_group:
 
 jobs:
   check-main:
