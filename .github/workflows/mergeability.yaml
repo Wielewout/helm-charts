@@ -9,7 +9,6 @@ on:
       - synchronize
     branches:
       - main
-  merge_group:
 
 jobs:
   check-main:
