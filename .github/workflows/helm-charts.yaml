@@ -189,7 +189,7 @@ jobs:
       - vars
       - lint-charts
       - test-charts
-    if: ${{ needs.vars.outputs.is_pull_request == 'true' && always() }}
+    if: ${{ !cancelled() && needs.vars.outputs.is_pull_request == 'true' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Successful checks
@@ -261,3 +261,4 @@ jobs:
       contents: write
       pull-requests: write
     uses: ./.github/workflows/release-please.yaml
+    secrets: inherit
