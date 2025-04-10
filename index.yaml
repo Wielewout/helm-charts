@@ -113,6 +113,40 @@ entries:
     urls:
     - https://github.com/Wielewout/helm-charts/releases/download/example-0.1.0/example-0.1.0.tgz
     version: 0.1.0
+  github-actions-scale-set:
+  - apiVersion: v2
+    appVersion: 0.10.0
+    created: "2025-04-10T18:34:59.901933104Z"
+    description: A Helm chart for deploying an AutoScalingRunnerSet
+    digest: d3424a4cc3ecd77ab6b90a39e82818139c2916a6ccc63d86ecdaa1a588a18f23
+    home: https://github.com/actions/actions-runner-controller
+    maintainers:
+    - name: actions
+      url: https://github.com/actions
+    name: github-actions-scale-set
+    sources:
+    - https://github.com/actions/actions-runner-controller
+    type: application
+    urls:
+    - https://github.com/Wielewout/helm-charts/releases/download/github-actions-scale-set-0.10.0/github-actions-scale-set-0.10.0.tgz
+    version: 0.10.0
+  github-actions-scale-set-controller:
+  - apiVersion: v2
+    appVersion: 0.10.0
+    created: "2025-04-10T18:35:00.070433069Z"
+    description: A Helm chart for install actions-runner-controller CRD
+    digest: 88e2b3358893151509840d02ee1e24ca8a10b7c433c3b9651ca257b9926bec48
+    home: https://github.com/actions/actions-runner-controller
+    maintainers:
+    - name: actions
+      url: https://github.com/actions
+    name: github-actions-scale-set-controller
+    sources:
+    - https://github.com/actions/actions-runner-controller
+    type: application
+    urls:
+    - https://github.com/Wielewout/helm-charts/releases/download/github-actions-scale-set-controller-0.10.0/github-actions-scale-set-controller-0.10.0.tgz
+    version: 0.10.0
   hello:
   - apiVersion: v2
     appVersion: 1.27.0
@@ -246,4 +280,4 @@ entries:
     urls:
     - https://github.com/Wielewout/helm-charts/releases/download/world-0.1.0/world-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-18T20:18:49.426772473Z"
+generated: "2025-04-10T18:35:00.391868752Z"
