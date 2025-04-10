@@ -31,6 +31,13 @@ To locally add all necessary repos:
 ./bin/add-repos
 ```
 
+During development it's also possible to test the chart locally.
+To add/update the local dependencies needed for that, the `bin/update-deps` script can be used.
+
+```sh
+./bin/update-deps
+```
+
 ## New charts
 
 A bit of setup is needed for release please when adding a new chart.
