@@ -1,0 +1,4 @@
+name: gha-runner-scale-set-controller
+alias: github-actions-scale-set-controller
+repository: oci://ghcr.io/actions/actions-runner-controller-charts
+version: 0.10.0
