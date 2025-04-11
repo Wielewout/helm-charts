@@ -33,7 +33,7 @@
     },
     {
       "customType": "regex",
-      "datasourceTemplate": "{{#if (containsString repository 'oci://')}}docker{{else}}helm{{/if}}",
+      "datasourceTemplate": "{{#if (containsString registryUrl'oci://')}}docker{{else}}helm{{/if}}",
       "fileMatch": [
         "(^|/)External\\.yaml$"
       ],
