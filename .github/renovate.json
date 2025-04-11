@@ -33,12 +33,12 @@
     },
     {
       "customType": "regex",
-      "datasourceTemplate": "{{#if (containsString registryUrl 'oci://')}}docker{{else}}helm{{/if}}",
+      "datasourceTemplate": "docker",
       "fileMatch": [
         "(^|/)External\\.yaml$"
       ],
       "matchStrings": [
-        "name:\\s+\"?(?<depName>.*?)\"?\\s+(.*\\s)?repository:\\s+\"?(?<registryUrl>.*?)\"?\\s+(.*\\s)?version:\\s+\"?(?<currentValue>[\\w\\.\\-]*)\"?"
+        "name:\\s+\"?(?<depName>.*?)\"?\\s+(.*\\s)?repository:\\s+\"?oci://(?<registryUrl>.*?)\"?\\s+(.*\\s)?version:\\s+\"?(?<currentValue>[\\w\\.\\-]*)\"?"
       ]
     },
     {
